@@ -33,7 +33,7 @@ python -u training/train_rig.py --arch="masknet_motion" -e --resume ="checkpoint
 ```
 
 2. Extract joints. 
-Change the dataset and the result folders at line 49-55 in evaluate/eval_rigging.
+Change the dataset and the result folders at line 49-55 in evaluate/eval_rigging.py.
 We have set the optimal hyper-parameters by default.
 ```
 python -u evaluate/eval_rigging.py

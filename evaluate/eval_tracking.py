@@ -168,78 +168,7 @@ def tracking_one(vtx_ori, rig, pts_traj, tpl_e, geo_e, deformnet):
     pred_vismask = np.stack(pred_vismask, axis=1)
     pred_quats = np.stack(pred_quats, axis=1)
     return pred_vtx_traj, pred_vismask, pred_quats
-    
-    
-    vtx_traj_filelist = glob.glob(os.path.join(testset_folder, f"*_vtx_traj.npy"))
-    for vtx_traj_filename in tqdm(vtx_traj_filelist[start_id:end_id]):
-        model_id = vtx_traj_filename.split("/")[-1].split("_")[0]
-        vtx_traj_filename = os.path.join(testset_folder, f"{model_id}_vtx_traj.npy")
-        if os.path.exists(os.path.join(rig_folder, f"tracking_loss/{model_id}_pred_vtx.npy")):
-            continue
-        mesh = o3d.io.read_triangle_mesh(os.path.join(mesh_folder, f"{model_id}.obj"))
-        if not os.path.exists(os.path.join(rig_folder, f"{model_id}_rig.txt")):
-            continue
-        rig = Rig(os.path.join(rig_folder, f"{model_id}_rig.txt"))
-        tpl_e = np.loadtxt(os.path.join(testset_folder, f"{model_id}_tpl_e.txt")).T
-        geo_e = np.loadtxt(os.path.join(testset_folder, f"{model_id}_geo_e.txt")).T
-        gt_vtx_traj = np.load(vtx_traj_filename)
-        gt_pts_traj = np.load(vtx_traj_filename.replace("_vtx_traj.npy", "_pts_traj.npy")).reshape(-1, 101, 3)
-        gt_vismask = np.load(vtx_traj_filename.replace("_vtx_traj.npy", "_vismask.npy"))
 
-        pred_vtx_traj, pred_vismask, tar_pts, corr_matrix, quats = [], [], [], [], []
-        full_flow_error, vis_flow_error = [], []
-        pred_vtx_traj.append(gt_vtx_traj[:, 0, :])
-        pred_vismask.append(gt_vismask[:, 0])
-        tar_pts.append(gt_pts_traj[:, 0, :])
-        corr_matrix.append(np.zeros((gt_vtx_traj.shape[0], gt_pts_traj.shape[0])))
-        quats.append(Rotation.from_matrix(rig.local_frames).as_quat())
-
-        for t in tqdm(range(1, seq_length + 1)):
-            pts_tar = gt_pts_traj[:, t, :]
-            vert_shift, pred_vismask_t, corr_matrix_t = run_deform_net_inference(flownet, pred_vtx_traj[-1], pts_tar, tpl_e, geo_e)
-        
-            if False:  # visualize flow shifting
-                mesh_last = copy.deepcopy(mesh)
-                mesh_last.vertices = o3d.utility.Vector3dVector(pred_vtx_traj[-1])
-                mesh_last_ls = o3d.geometry.LineSet.create_from_triangle_mesh(mesh_last)
-                mesh_last_ls.paint_uniform_color([0.0, 0.0, 1.0])
-                mesh_shift = copy.deepcopy(mesh)
-                mesh_shift.vertices = o3d.utility.Vector3dVector(vert_shift)
-                mesh_shift_ls = o3d.geometry.LineSet.create_from_triangle_mesh(mesh_shift)
-                mesh_shift_ls.paint_uniform_color([1.0, 0.0, 0.0])
-                #pcd = o3d.geometry.PointCloud(points=o3d.utility.Vector3dVector(pts_tar))
-                #pcd.paint_uniform_color([0.0, 0.0, 1.0])
-                vis = o3d.visualization.Visualizer()
-                vis.create_window()
-                vis.add_geometry(mesh_last_ls)
-                vis.add_geometry(mesh_shift_ls.translate([1.0, 0.0, 0.0]))
-                #vis.add_geometry(pcd.translate([2.0, 0.0, 0.0]))
-                vis.run()
-                vis.destroy_window()
-
-            pred_vtx_traj.append(vert_shift)
-            pred_vismask.append(pred_vismask_t.squeeze(axis=1))
-            corr_matrix.append(corr_matrix_t)
-            tar_pts.append(pts_tar)
-            pred_vtx_traj[t], quats_t = ik_drag(pred_vtx_traj[0], pred_vtx_traj[t], pts_tar, rig, corr_matrix_t, pred_vismask[t])
-            quats.append(quats_t)
-
-            if False:  # visualize flow shifting
-                mesh_ls = o3d.geometry.LineSet.create_from_triangle_mesh(mesh)
-                mesh_ls.paint_uniform_color([0.0, 0.0, 1.0])
-                mesh_shift = copy.deepcopy(mesh)
-                mesh_shift.vertices = o3d.utility.Vector3dVector(pred_vtx_traj[t])
-                mesh_shift_ls = o3d.geometry.LineSet.create_from_triangle_mesh(mesh_shift)
-                mesh_shift_ls.paint_uniform_color([1.0, 0.0, 0.0])
-                #pcd = o3d.geometry.PointCloud(points=o3d.utility.Vector3dVector(pts_tar))
-                #pcd.paint_uniform_color([0.0, 0.0, 1.0])
-                vis = o3d.visualization.Visualizer()
-                vis.create_window()
-                vis.add_geometry(mesh_ls)
-                vis.add_geometry(mesh_shift_ls.translate([1.0, 0.0, 0.0]))
-                #vis.add_geometry(pcd.translate([2.0, 0.0, 0.0]))
-                vis.run()
-                vis.destroy_window()
 
 
 def plot(type="full"):
