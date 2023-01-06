@@ -56,9 +56,9 @@ One can run the following steps to train all the networks.
 1. Train a correspondence module with discrete frames on ModelsResources dataset.
 ```
 python -u training/train_corr_pose.py \
---train_folder="DATASET_PATH/ModelsReources/train/" \
---val_folder="DATASET_PATH/ModelsReources/val/" \
---test_folder="DATASET_PATH/ModelsReources/test/" 
+--train_folder="DATASET_PATH/ModelsResources/train/" \
+--val_folder="DATASET_PATH/ModelsResources/val/" \
+--test_folder="DATASET_PATH/ModelsResources/test/" 
 --train_batch=8 --test_batch=8 \
 --logdir="logs/corr_p_mr" \ 
 --checkpoint="checkpoints/corr_p_mr" \ 
@@ -69,9 +69,9 @@ python -u training/train_corr_pose.py \
 2. (After 1) Train a deformation module with discrete frames on ModelsResources dataset
 ```
 python -u training/train_deform_pose.py \
---train_folder="DATASET_PATH/ModelsReources/train/" \
---val_folder="DATASET_PATH/ModelsReources/val/" \
---test_folder="DATASET_PATH/ModelsReources/test/" \
+--train_folder="DATASET_PATH/ModelsResources/train/" \
+--val_folder="DATASET_PATH/ModelsResources/val/" \
+--test_folder="DATASET_PATH/ModelsResources/test/" \
 --train_batch=6 --test_batch=6 \
 --logdir="logs/deform_p_mr" \
 --checkpoint="checkpoints/deform_p_mr" \
@@ -84,9 +84,9 @@ You need to output predicted deformation if you use different data:
 ```
 python -u training/train_rig.py \
 --arch="jointnet_motion" \
---train_folder="DATASET_PATH/ModelsReources/train/" \
---val_folder="DATASET_PATH/ModelsReources/val/" \
---test_folder="DATASET_PATH/ModelsReources/test/" \
+--train_folder="DATASET_PATH/ModelsResources/train/" \
+--val_folder="DATASET_PATH/ModelsResources/val/" \
+--test_folder="DATASET_PATH/ModelsResources/test/" \
 --train_batch=4 --test_batch=4 \
 --logdir="logs/jointnet_motion" \
 --checkpoint="checkpoints/jointnet_motion" \
@@ -96,9 +96,9 @@ python -u training/train_rig.py \
 ```
 python -u training/train_rig.py \
 --arch="masknet_motion" \
---train_folder="DATASET_PATH/ModelsReources/train/" \
---val_folder="DATASET_PATH/ModelsReources/val/" \
---test_folder="DATASET_PATH/ModelsReources/test/" \
+--train_folder="DATASET_PATH/ModelsResources/train/" \
+--val_folder="DATASET_PATH/ModelsResources/val/" \
+--test_folder="DATASET_PATH/ModelsResources/test/" \
 --train_batch=4 --test_batch=4 \
 --logdir="logs/masknet_motion" \
 --checkpoint="checkpoints/masknet_motion" \
@@ -109,9 +109,9 @@ python -u training/train_rig.py \
 ```
 python -u training/train_skin.py \
 --arch="skinnet_motion" \
---train_folder="DATASET_PATH/ModelsReources/train/" \
---val_folder="DATASET_PATH/ModelsReources/val/" \
---test_folder="DATASET_PATH/ModelsReources/test/" \
+--train_folder="DATASET_PATH/ModelsResources/train/" \
+--val_folder="DATASET_PATH/ModelsResources/val/" \
+--test_folder="DATASET_PATH/ModelsResources/test/" \
 --train_batch=4 --test_batch=4 \
 --logdir="logs/skin_motion" \
 --checkpoint="checkpoints/skin_motion" \
@@ -123,9 +123,9 @@ python -u training/train_skin.py \
 deformation module with sequential frames on ModelsResources dataset. This can be achieved by simply adding "--sequential_frame":
 ```
 python -u training/train_corr_pose.py \
---train_folder="DATASET_PATH/ModelsReources/train/" \
---val_folder="DATASET_PATH/ModelsReources/val/" \
---test_folder="DATASET_PATH/ModelsReources/test/" 
+--train_folder="DATASET_PATH/ModelsResources/train/" \
+--val_folder="DATASET_PATH/ModelsResources/val/" \
+--test_folder="DATASET_PATH/ModelsResources/test/" 
 --train_batch=8 --test_batch=8 \
 --logdir="logs/corr_p_mr_seq" \ 
 --checkpoint="checkpoints/corr_p_mr_seq" \ 
@@ -135,9 +135,9 @@ python -u training/train_corr_pose.py \
 ```
 ```
 python -u training/train_deform_pose.py \
---train_folder="DATASET_PATH/ModelsReources/train/" \
---val_folder="DATASET_PATH/ModelsReources/val/" \
---test_folder="DATASET_PATH/ModelsReources/test/" \
+--train_folder="DATASET_PATH/ModelsResources/train/" \
+--val_folder="DATASET_PATH/ModelsResources/val/" \
+--test_folder="DATASET_PATH/ModelsResources/test/" \
 --train_batch=6 --test_batch=6 \
 --logdir="logs/deform_p_mr_seq" \
 --checkpoint="checkpoints/deform_p_mr_seq" \
@@ -179,9 +179,9 @@ we first deform the shape of the mesh to fit the point cloud.
 This can be achieved by the same correspondence and deformation module architecture trained on data with different shape (train_deform/val_deform/test_deform):
 ```
 python -u training/train_corr_shape.py \
---train_folder="DATASET_PATH/ModelsReources/train_deform/" \
---val_folder="DATASET_PATH/ModelsReources/val_deform/" \
---test_folder="DATASET_PATH/ModelsReources/test_deform/" 
+--train_folder="DATASET_PATH/ModelsResources/train_deform/" \
+--val_folder="DATASET_PATH/ModelsResources/val_deform/" \
+--test_folder="DATASET_PATH/ModelsResources/test_deform/" 
 --train_batch=8 --test_batch=8 \
 --logdir="logs/corr_s_mr" \ 
 --checkpoint="checkpoints/corr_s_mr" \ 
@@ -191,9 +191,9 @@ python -u training/train_corr_shape.py \
 ```
 ```
 python -u training/train_deform_shape.py \
---train_folder="DATASET_PATH/ModelsReources/train_deform/" \
---val_folder="DATASET_PATH/ModelsReources/val_deform/" \
---test_folder="DATASET_PATH/ModelsReources/test_deform/" \
+--train_folder="DATASET_PATH/ModelsResources/train_deform/" \
+--val_folder="DATASET_PATH/ModelsResources/val_deform/" \
+--test_folder="DATASET_PATH/ModelsResources/test_deform/" \
 --train_batch=6 --test_batch=6 \
 --logdir="logs/deform_s_mr" \
 --checkpoint="checkpoints/deform_s_mr" \
