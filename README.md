@@ -1,6 +1,6 @@
 This is the code repository implementing the paper "Morig: Motion-aware rigging of character meshes from point clouds".
 
-**[2023.02.17]** About the ModelsResources dataset: If you are from a research lab and interested in the dataset for research-only purposes, please send a request email to me at zhanxu@cs.umass.edu.
+**[2023.02.17]** About the ModelsResources dataset: If you are from a research lab and interested in the dataset for non-commercial, research-only purposes, please send a request email to me at zhanxu@cs.umass.edu.
 
 ## Setup
 The project is developed on Ubuntu 20.04 with cuda11.3.
