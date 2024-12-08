@@ -1,6 +1,6 @@
 This is the code repository implementing the paper "Morig: Motion-aware rigging of character meshes from point clouds".
 
-**[2023.02.17]** About the ModelsResources dataset: If you are from a research lab and interested in the dataset for non-commercial, research-only purposes, please send a request email to me at zhanxu@cs.umass.edu.
+We put the processed data, trained model and our results in [this folder](https://terabox.com/s/1j6Ilj0d0dgese2Ef1iGZ_g). If you are interested in the original ModelsResources Dataset, please check our previous [RigNet](https://github.com/zhan-xu/RigNet) work.
 
 ## Setup
 The project is developed on Ubuntu 20.04 with cuda11.3.
@@ -12,14 +12,14 @@ conda activate morig
 
 ## Datasets
 Download the processed datasets we used from the following links:
-1. [ModelsResources](https://umass-my.sharepoint.com/:u:/g/personal/zhanxu_umass_edu/EeiBvoeAJdVPl3Sx9xKHhisBcBulUu63IZnOaXJ0ZtfEqQ?e=C36xcb) (16.9G)
-2. [DeformingThings4D](https://umass-my.sharepoint.com/:u:/g/personal/zhanxu_umass_edu/EW_2pbf8LNRNhofmgf-XTasB8VyU8I-r3F1bv1qU9lmhIQ?e=aQNUBu) (10.5G)
+1. [ModelsResources](https://terabox.com/s/1Rq-HtLCHFcOmAAUDjBgUHA) (16.9G)
+2. [DeformingThings4D](https://terabox.com/s/1d3rNZ-DzqEtSjAYanKIyBQ) (10.5G)
 
 
 ## Testing & Evaluation
 
 ### Pretrained models
-Download our pretrained models from [here](https://umass-my.sharepoint.com/:u:/g/personal/zhanxu_umass_edu/EU011m-IkQhBkeItRXuKJzoBlwAy2GG2DhZERFCOfn8NVg?e=pHhLFL).
+Download our pretrained models from [here](https://terabox.com/s/1enylsqNAI2Fj2fVFvuql1w).
 
 ### Demo
 We provide a demo script that concatenates all the steps, as a reference of the whole pipeline.
