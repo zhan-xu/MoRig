@@ -50,7 +50,7 @@ Remember to change dataset_folder in each function.
 python -u evaluate/eval_tracking.py
 ```
 
-I put our results [here](https://umass-my.sharepoint.com/:u:/g/personal/zhanxu_umass_edu/Ea7eMXkBdlRDrrtkB3RKYRUBC_UiuPpHGg0eahx_sVipRw?e=12YuVO) for your reference.
+I put our results [here](https://terabox.com/s/1hQUojjByerBoaWkTl2HdWQ) for your reference.
 
 ## Training
 One can run the following steps to train all the networks.
